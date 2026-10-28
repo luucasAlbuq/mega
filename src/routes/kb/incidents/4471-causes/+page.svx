@@ -1,0 +1,39 @@
+---
+layout: runbook
+title: '#4471 · two causes in one ticket'
+owner: luucasAlbuq
+status: accepted
+reviewed: 2026-10-28
+signature: "v1.eyJzdWIiOiIxMzMxIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxOTQ5NTksImV4cCI6MTc5MzI4MTM1OX0.Zc0Z9AMRgGwei57zkX6RI_-_K6981wlnM4Q0efRfixk"
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+Ticket **#4471** was opened for day-first tenants whose dates land on the wrong day. The desk
+merged **412** reports into it and marked the ticket **known** as one parser bug. The export
+shows **two** causes in that pile, not one.
+
+<CauseTable ticket={4471} />
+
+<Callout>
+The ticket’s owner cause is <code>parser</code> (379 reports). **33** reports are
+<code>hint</code>: booking-v3 shows an MM/DD hint while the tenant locale is day-first, so people
+type month-first and the form parses day-first. That is a different fix from the shared parser
+reading every date month-first.
+</Callout>
+
+## What to file
+
+| cause | reports | belongs on #4471? |
+| --- | ---: | --- |
+| `parser` | 379 | yes — shared parser reads month first |
+| `hint` | 33 | no — split to its own ticket |
+
+Intake tagged many `hint` reports as `parser` because the subject lines match #4471. Group by
+cause (`causes.ts` + tenant locale and form), not by subject alone.
+
+<RenderStamp {signature} />
