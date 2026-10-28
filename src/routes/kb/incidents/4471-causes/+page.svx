@@ -36,4 +36,11 @@ reading every date month-first.
 Intake tagged many `hint` reports as `parser` because the subject lines match #4471. Group by
 cause (`causes.ts` + tenant locale and form), not by subject alone.
 
+## Engineering update · #4471 closed 5 Oct
+
+| cause | disposition | note |
+| --- | --- | --- |
+| `parser` | **fixed** | `fix(dates): parse dd/mm for eu locales` |
+| `hint` | **won't fix** | booking-v3 form retired |
+
 <RenderStamp {signature} />
